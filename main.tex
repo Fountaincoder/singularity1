@@ -14,7 +14,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-This report consists of a review of the literature and a plan for integration related to \textbf{temporal computing}, a novel method of computation that uses time intervals as the primary method of storing and manipulating data. The literature review covers a broad range of methods which implement both computation and communication. The plan of further work focuses on assessing the a novel temporally inspired digital implementation of dot product, and a broader more theoretical work on the fundamental building blocks of temporal computing methods.    
+	This report consists of a review of the literature and a plan for integration related to \textbf{temporal computing}, a novel method of computation that uses time intervals as the primary method of storing and manipulating data. The literature review covers a broad range of methods which implement both computation and communication. The plan of further work focuses on assessing the a novel temporally inspired digital implementation of dot product, and a broader more theoretical work on the fundamental building blocks of temporal computing methods.
 \end{abstract}
 
 \section{Introduction}
@@ -22,46 +22,46 @@ The ability to perform accurate repetitive computation has been central to numer
 
 
 \begin{figure}[ht]
-  \centering
-  \includegraphics[width=200pt]{figures/intel2.jpg}
-  \caption{Predicted physical gate size decline over the next five years. Credit: \url{https://doi.org/10.1098/rsta.2019.0061/}}
-  \label{fig:intel}
+	\centering
+	\includegraphics[width=200pt]{figures/intel2.jpg}
+	\caption{Predicted physical gate size decline over the next five years. Credit: \url{https://doi.org/10.1098/rsta.2019.0061/}}
+	\label{fig:intel}
 \end{figure}
 
-At the same time, methods of data processing using learning systems have become significant new architectural components. Of these, Deep Learning (DL) \cite{lecun2015deep} has provided best-in-class performance on many machine learning tasks, and revitalised many areas of pattern recognition, opening up a revolution in new services that were traditionally performed using human intensive processes. Moreover, these methods are not well supported by traditional computer architectures \cite{JEON2021167} as they require massive parallelism, similarly to the brain. Graphics Processing Units (GPUs) , initially built for video games, have been successfully utilised, but still suffer from high levels of inefficiencies which are many orders of magnitude away from biological systems in energy and ability. 
+At the same time, methods of data processing using learning systems have become significant new architectural components. Of these, Deep Learning (DL) \cite{lecun2015deep} has provided best-in-class performance on many machine learning tasks, and revitalised many areas of pattern recognition, opening up a revolution in new services that were traditionally performed using human intensive processes. Moreover, these methods are not well supported by traditional computer architectures \cite{JEON2021167} as they require massive parallelism, similarly to the brain. Graphics Processing Units (GPUs) , initially built for video games, have been successfully utilised, but still suffer from high levels of inefficiencies which are many orders of magnitude away from biological systems in energy and ability.
 
-Given this impasse, there is a need to look more broadly at the problem of improving the efficiency \textbf{and} accelerating computation. This has resulted in a ``Cambrian explosion'' \cite{hennessy2019new} of new approaches, and this research focuses on one of these, \textbf{ temporal computing}. 
+Given this impasse, there is a need to look more broadly at the problem of improving the efficiency \textbf{and} accelerating computation. This has resulted in a ``Cambrian explosion'' \cite{hennessy2019new} of new approaches, and this research focuses on one of these, \textbf{ temporal computing}.
 
 This new approach represents numbers with a unary encoding (discussed in more detail in Section \ref{unary}) instead of binary, and uses \textit{time delays} to represent data instead of digital bit manipulation. We are drawn to this area for several reasons.
 
 \begin{enumerate}
-\item There is a precedence in nature, the human brain uses spike-based information as the main processing encoding \cite{victor2000brain}.
-\item Unary is more simplistic than binary to compute with. Tools such as the abacus are among the earliest calculators \cite{POPPELBAUM198747}.
-\item On the surface, time appears to be a free resource. For a typically coded temporal interval, the is only ever a requirement for two delimiting spikes (See Figure \ref{fig:two} ) \cite{smith2022temporal}.
+	\item There is a precedence in nature, the human brain uses spike-based information as the main processing encoding \cite{victor2000brain}.
+	\item Unary is more simplistic than binary to compute with. Tools such as the abacus are among the earliest calculators \cite{POPPELBAUM198747}.
+	\item On the surface, time appears to be a free resource. For a typically coded temporal interval, the is only ever a requirement for two delimiting spikes (See Figure \ref{fig:two} ) \cite{smith2022temporal}.
 \end{enumerate}
 
 \begin{figure}[ht]
-  \centering
-  \includegraphics[width=200pt]{figures/logfig1.png}
-  \caption{A typical value can be represented as two delimiting spikes.}
-  \label{fig:two}
+	\centering
+	\includegraphics[width=200pt]{figures/logfig1.png}
+	\caption{A typical value can be represented as two delimiting spikes.}
+	\label{fig:two}
 \end{figure}
 
 
 
 The three capabilities detailed above provide a broad definition of an area of research, but this is yet to be established in the mainstream. Four areas: racelogic, unary processing, oscillatory Computing and neuromorphic compute, utilise time as a medium but do so without explicitly exploiting the above features. This is particularly the case with two areas under review, neuromorphic and oscillatory computing, with methods in these areas often conflating the benefits of hardware and problem specific algorithmic approaches.
 
-The problem of defining temporal computing is further compounded by misuse of the term ``stochastic'' eg in works \cite{wu2020ugemm,wu2023power}, and significant oversight in not including previous work from the late sixties on unary compute \cite{POPPELBAUM198747}, in discussions. 
+The problem of defining temporal computing is further compounded by misuse of the term ``stochastic'' eg in works \cite{wu2020ugemm,wu2023power}, and significant oversight in not including previous work from the late sixties on unary compute \cite{POPPELBAUM198747}, in discussions.
 
 With this in mind, the agenda of this report is:
 \begin{itemize}
-  \item To cover all research specifically referenced as ``temporal'' by the racelogic community (section \ref{race}).
-  \item To also include older work on Unary computing including work referred to as temporal/unary but which also could be defined as stochastic. (section \ref{unary}).
-  \item To also include communication methods that use similar interval encodings and have processing approaches that may be repurposed to compute (Section \ref{coms}). 
-  \item For completeness, include both oscillatory and neuromorphic computing in the discussion (Sections \ref{oscil} and \ref{neuro})
+	\item To cover all research specifically referenced as ``temporal'' by the racelogic community (section \ref{race}).
+	\item To also include older work on Unary computing including work referred to as temporal/unary but which also could be defined as stochastic. (section \ref{unary}).
+	\item To also include communication methods that use similar interval encodings and have processing approaches that may be repurposed to compute (Section \ref{coms}).
+	\item For completeness, include both oscillatory and neuromorphic computing in the discussion (Sections \ref{oscil} and \ref{neuro})
 \end{itemize}
 
-This nicely sets the agenda for future work which we define as a mission with a plan and milestones (See separate planning document). 
+This nicely sets the agenda for future work which we define as a mission with a plan and milestones (See separate planning document).
 
 \section{Racelogic} \label{race}
 Racelogic is undoubtedly the most significant area of research in the temporal domain, both computation and memory, and has formed a small community in the US \cite{madhavan2014race}.
@@ -70,69 +70,69 @@ The central theme of this work is the utilisation of the two timing properties o
 
 
 \begin{figure}[ht]
-  \centering
-  \subfigure[]{
-    \includegraphics[width=200pt]{figures/racesignal.png}
-  }
-  \\
-  \subfigure[]{
-    \includegraphics[width=200pt]{figures/minmax.png}
-  }
-  \caption{A visual explanation of racelogic. The first diagram shows the representation and second gives the ``race'' min/max effect}
-  \label{fig:race}
+	\centering
+	\subfigure[]{
+		\includegraphics[width=200pt]{figures/racesignal.png}
+	}
+	\\
+	\subfigure[]{
+		\includegraphics[width=200pt]{figures/minmax.png}
+	}
+	\caption{A visual explanation of racelogic. The first diagram shows the representation and second gives the ``race'' min/max effect}
+	\label{fig:race}
 \end{figure}
 
 
-Using this a variety of systems have been proposed and implemented \cite{madhavan2014race}, most notably to perform minimum and maximum path search on a graph \cite{madhavan2015race}. 
+Using this a variety of systems have been proposed and implemented \cite{madhavan2014race}, most notably to perform minimum and maximum path search on a graph \cite{madhavan2015race}.
 
-This work has been extended to utilise a tropical algebra \cite{madhavan2021temporal} a semi-ring that implements multiplication and addition, and this was referred to as a Temporal State Machine. Under this scheme various additional graph algorithms including Dikstra's were implemented and benchmarked. 
+This work has been extended to utilise a tropical algebra \cite{madhavan2021temporal} a semi-ring that implements multiplication and addition, and this was referred to as a Temporal State Machine. Under this scheme various additional graph algorithms including Dikstra's were implemented and benchmarked.
 
 Further work by this group also involved building temporal memories called \textit{Racetracks} \cite{vakili2020temporal,madhavan2020storing}. The basis of this is akin to dragging a bucket for a set distance, the time to do this becomes fixed for a set bucket size (see Figure \ref{fig:racetrack}). In this work this is implemented on a magnetic platform, with the addition of a recovery track to reset the memory. This is the first known implementation of memory and the ``dragging time'' approach seems to be something that could be readily applied in many resistive physical mediums.
 
 \begin{figure}[ht]
-  \centering
-  \includegraphics[width=300pt]{figures/racetrack.png}
-  \caption{The racetrack memory operations. Taken from \cite{vakili2020temporal}}
-  \label{fig:racetrack}
+	\centering
+	\includegraphics[width=300pt]{figures/racetrack.png}
+	\caption{The racetrack memory operations. Taken from \cite{vakili2020temporal}}
+	\label{fig:racetrack}
 \end{figure}
 
-The logic gate processing format has also been explored by two further parties, in the context of superconducting mediums \cite{tzimpragos2019arbitrary} \cite{tzimpragos2021temporal} \cite{tzimpragos2022computing} \cite{volk2023addressable} \cite{segal2022digital} also as a formulation for a specific supporting algebra. The superconducting work follows a similar pattern and is limited to a constrained view of logic operations applied to temporally organised inputs. This work is excellent proof-of-concept work, but lacks reference to comparable digital algorithms and the nature of space/time trade-offs. 
+The logic gate processing format has also been explored by two further parties, in the context of superconducting mediums \cite{tzimpragos2019arbitrary} \cite{tzimpragos2021temporal} \cite{tzimpragos2022computing} \cite{volk2023addressable} \cite{segal2022digital} also as a formulation for a specific supporting algebra. The superconducting work follows a similar pattern and is limited to a constrained view of logic operations applied to temporally organised inputs. This work is excellent proof-of-concept work, but lacks reference to comparable digital algorithms and the nature of space/time trade-offs.
 
 \section{Unary Computation} \label{unary}
 
 Unary number systems (\cite{MacKay:2002:ITI:971143} Chapter 7 page 133) were amongst the earliest numerical representations of quantity, with the abacus existing as the earliest calculating device \cite{POPPELBAUM198747}. Unary codes are a simplification, with either binary digit acting as the delimiter. Table \ref{mem1} gives a breakdown of how unary codes are constructed for the first few decimal numbers. We introduce a further code Discrete Pulse Interval Modulation (DPIM), which is a form of unary code, and is used in the communication community and is discussed in Section \ref{coms}.
 
 \begin{table}[ht]
-  \begin{center}
-    \begin{tabular}{rlll} \hline
-      \textbf{Decimal} & Unary (U) & Unary code (UC) & DPIM \\\hline
-      \textbf{0}    &    & (0) may delimit & (11) may delimit \\
-      \textbf{1}    & 1   & 1        & 101\\
-      \textbf{2}    & 11  & 10        & 1001\\
-      \textbf{3}    & 111  & 100       & 10001\\ \hline
-    \end{tabular}
-  \end{center}
-  \caption{Coding Schemes related to Temporal Computing}\label{mem1}
+	\begin{center}
+		\begin{tabular}{rlll} \hline
+			\textbf{Decimal} & Unary (U) & Unary code (UC) & DPIM             \\\hline
+			\textbf{0}       &           & (0) may delimit & (11) may delimit \\
+			\textbf{1}       & 1         & 1               & 101              \\
+			\textbf{2}       & 11        & 10              & 1001             \\
+			\textbf{3}       & 111       & 100             & 10001            \\ \hline
+		\end{tabular}
+	\end{center}
+	\caption{Coding Schemes related to Temporal Computing}\label{mem1}
 \end{table}
 
 
-One of the key benefits for all the unary family is that simple arithmetic is easily derived: Addition with unary, as with the abacus, is performed trivially using simple concatenation \cite{jonny1}. 
+One of the key benefits for all the unary family is that simple arithmetic is easily derived: Addition with unary, as with the abacus, is performed trivially using simple concatenation \cite{jonny1}.
 
-Integer multiplication of unary codes is performed by dilating the first unary code by the size of the second code. In a fully clock based architecture this can be performed by changing the relative clock speeds of the sender and receiver of the signal (see \cite{jonny1} section 3.3 for a more detailed explanation)  Again, this is a simple operation which requires only basic logic to perform. 
+Integer multiplication of unary codes is performed by dilating the first unary code by the size of the second code. In a fully clock based architecture this can be performed by changing the relative clock speeds of the sender and receiver of the signal (see \cite{jonny1} section 3.3 for a more detailed explanation)  Again, this is a simple operation which requires only basic logic to perform.
 
 The review paper of Poppelbaum \cite{POPPELBAUM198747} explains in some detail first-generation unary computers. There are three types of unary processing: stochastic, burst and pulse gear based approaches. These systems can be summarised as follows:
 
 \begin{description}
-  \item[Stochastic] where the unary value represents a discrete probabilistic range, sometimes with randomness incorporated. Many machines have been built with this premise, including \textbf{RASCEL} \cite{esch1969rascel} \textbf{POSTCOMP} \cite{poppelbaum1967stochastic}. This continues to be an active field of research \cite{alaghi2013survey}.
-  \item[Burst] This is more akin to traditional unary but with a specific bit-width, so for instance 7 out of 10 bits set (\texttt{1111111000}) would equal 7. Examples of it's use are \textbf{BURST} \cite{POPPELBAUM198747} and \textbf{WALSHSTORE} \cite{bracha1978walshstore}.
-  \item[Pulse Gear] This again uses burst unary but provides a clever method for shifting and ANDing to perform operations. An example of this is the \textbf{UNIFIELD} processor \cite{dollas1987architecture}. 
+	\item[Stochastic] where the unary value represents a discrete probabilistic range, sometimes with randomness incorporated. Many machines have been built with this premise, including \textbf{RASCEL} \cite{esch1969rascel} \textbf{POSTCOMP} \cite{poppelbaum1967stochastic}. This continues to be an active field of research \cite{alaghi2013survey}.
+	\item[Burst] This is more akin to traditional unary but with a specific bit-width, so for instance 7 out of 10 bits set (\texttt{1111111000}) would equal 7. Examples of it's use are \textbf{BURST} \cite{POPPELBAUM198747} and \textbf{WALSHSTORE} \cite{bracha1978walshstore}.
+	\item[Pulse Gear] This again uses burst unary but provides a clever method for shifting and ANDing to perform operations. An example of this is the \textbf{UNIFIELD} processor \cite{dollas1987architecture}.
 \end{description}
 
-These largely forgotten systems are all very interesting applications of unary and could be utilised in the design of new processing elements, the Pulse Gear methods, and the use of AND gates and counters have some resonance with methods discussed later in this review. 
+These largely forgotten systems are all very interesting applications of unary and could be utilised in the design of new processing elements, the Pulse Gear methods, and the use of AND gates and counters have some resonance with methods discussed later in this review.
 
-Two further points should be noted. Firstly, none of these systems use the benefits of redundancy and the delimiting nature of unary codes and are firmly wedded to using many boolean \texttt{on} (\texttt{1}'s) values. Secondly they are explicitly non-temporal, this means that time is not used to represent data. 
+Two further points should be noted. Firstly, none of these systems use the benefits of redundancy and the delimiting nature of unary codes and are firmly wedded to using many boolean \texttt{on} (\texttt{1}'s) values. Secondly they are explicitly non-temporal, this means that time is not used to represent data.
 
-More modern work in this area has been performed by Wu \cite{wu2020ugemm} \cite{pan2022t} \cite{wu2022usystolic}. This work is again mainly unary and again not explicitly temporal. 
+More modern work in this area has been performed by Wu \cite{wu2020ugemm} \cite{pan2022t} \cite{wu2022usystolic}. This work is again mainly unary and again not explicitly temporal.
 
 \subsection{Multiplexed Unary}
 
@@ -140,30 +140,30 @@ More modern work in this area has been performed by Wu \cite{wu2020ugemm} \cite{
 
 
 \begin{figure}
-  \centerline{\includegraphics[width=100pt]{figures/multiplex.png}}
-  \caption{An example of genuine multiplexing}\label{fig:mul1}
+	\centerline{\includegraphics[width=100pt]{figures/multiplex.png}}
+	\caption{An example of genuine multiplexing}\label{fig:mul1}
 \end{figure}
 
 \begin{algorithm}
-  %\SetLine % For v3.9
-  \SetAlgoLined % For previous releases [?]
-  \For{each value I in C}{
-    At position I in MUX window append $1$\;
-  }
-\caption{Encoding Algorithm}
+	%\SetLine % For v3.9
+	\SetAlgoLined % For previous releases [?]
+	\For{each value I in C}{
+		At position I in MUX window append $1$\;
+	}
+	\caption{Encoding Algorithm}
 \end{algorithm}
 
 Once transformed, signals can be interleaved in such a way that they can be easily recovered. To de-multiplex, the process is reversed, with the MUX channel progressively reconstructs the input values back into separate channels.
 
 \begin{algorithm}
-  %\SetLine % For v3.9
-  \SetAlgoLined % For previous releases [?]
-  \For{0..$I$} {
-    \If 1 {
-        Write I into output channel;
-      }
-  }
-\caption{Decoding Algorithm for DMU} 
+	%\SetLine % For v3.9
+	\SetAlgoLined % For previous releases [?]
+	\For{0..$I$} {
+		\If 1 {
+				Write I into output channel;
+			}
+	}
+	\caption{Decoding Algorithm for DMU}
 \end{algorithm}
 
 
@@ -171,8 +171,8 @@ A natural extension is to enable the unary coded $1$ value to be multi-valent. A
 
 
 \begin{figure}[ht]
-  \centerline{\includegraphics[width=100pt]{figures/multiplex2.png}}
-  \caption{Multi-valent multiplexing for a potential analog implementation}\label{fig:multiply}
+	\centerline{\includegraphics[width=100pt]{figures/multiplex2.png}}
+	\caption{Multi-valent multiplexing for a potential analog implementation}\label{fig:multiply}
 \end{figure}
 
 Although not immediately obvious, an uncertainty relationship exists between position and data when ``dense'' multiplexing is used. To illustrate this let us take the trivial sequence (1,3,2) with knowledge of the prior this could be easily transformed into the densely multiplexed representation of (111) \footnote{1=1,2=01,3=001} which notionally can be represented with a smaller number of bits, but with a loss of order in the data. Adding positional values via a positional index recovers from the problem but at the cost of extra data, with a different prior distribution.
@@ -182,20 +182,20 @@ Clearly, the act of multiplication can be transformed into manipulating the valu
 Under a simple scheme, tuples can be added arbitrarily to the array at their $t$ index point.  A dot product on this multiplexed array can be evaluated efficiently and in a systolic way using the \textbf{Multiplicative ADD} (MADD) algorithm (Algorithm \ref{madd}) as shown in \cite{jonny-asynch}. Figure \ref{fig:madd} demonstrates that the algorithm is effectively finding the area of the rectangles $4 \times 10$ and $4 \times 4$ by progressively sweeping in one pass back across the indexed array, counting initially the first $6 \times 4$ and then the remaining $8 \times 4$.
 
 \begin{algorithm}
-$acc,height \gets 0$\;
-$i \gets |mem|-1$\;
-\While{$i>0$}{
-    $height \gets height + mem[i]$\;
-    $acc \gets acc + height$\;
-    $i \gets i-1$\;
-    }
-\textbf{return} acc 
-\caption{The MADD algorithm} \label{madd}
+	$acc,height \gets 0$\;
+	$i \gets |mem|-1$\;
+	\While{$i>0$}{
+		$height \gets height + mem[i]$\;
+		$acc \gets acc + height$\;
+		$i \gets i-1$\;
+	}
+	\textbf{return} acc
+	\caption{The MADD algorithm} \label{madd}
 \end{algorithm}
 
 \begin{figure}[ht]
-  \centerline{\includegraphics[width=200pt]{figures/rId37.png}}
-  \caption{MADD: A description based on a goemetric view of the MADD algorithm. Here we perform the operation $(4 \times 10)+(4 \times 4)$ right to left by accumulating the "height" at the index point}\label{fig:madd}
+	\centerline{\includegraphics[width=200pt]{figures/rId37.png}}
+	\caption{MADD: A description based on a goemetric view of the MADD algorithm. Here we perform the operation $(4 \times 10)+(4 \times 4)$ right to left by accumulating the "height" at the index point}\label{fig:madd}
 \end{figure}
 
 The MADD algorithm originated from the use of discrete memory indexes as a simulation of time delays. As such the MADD algorithm is inspired by the temporal approach, but, its representation does not use time delays directly as the storage medium. Appendix \ref{app:dmadd} discusses an extension to this method, called Delta MADD.
@@ -208,65 +208,65 @@ There are several further compelling advantages:
 
 \begin{description}
 
-\item [Bandwidth Efficiency] DPIM is more bandwidth-efficient than some other modulation schemes. This is because it doesn't require changes in amplitude or pulse width, which can demand more bandwidth.
-\item [Power Efficiency] Since DPIM doesn't rely on varying amplitude, it can be more power-efficient. Ghassemlooy states:
+	\item [Bandwidth Efficiency] DPIM is more bandwidth-efficient than some other modulation schemes. This is because it doesn't require changes in amplitude or pulse width, which can demand more bandwidth.
+	\item [Power Efficiency] Since DPIM doesn't rely on varying amplitude, it can be more power-efficient. Ghassemlooy states:
 
-\begin{quote}
-For the same packet error performance, 4-bit DPIM has about a 5dB power advantage over OOK, but requires approximately 1dB more power than 4-bit PPM \cite{ghassemlooy2000digital}.
-\end{quote}
+	      \begin{quote}
+		      For the same packet error performance, 4-bit DPIM has about a 5dB power advantage over OOK, but requires approximately 1dB more power than 4-bit PPM \cite{ghassemlooy2000digital}.
+	      \end{quote}
 
-OOK is traditional bit encoding and PPM is Pulse Position Modulation (the same as DPIM but with a constant bit-width, hence pulses are not self-delimiting).
+	      OOK is traditional bit encoding and PPM is Pulse Position Modulation (the same as DPIM but with a constant bit-width, hence pulses are not self-delimiting).
 
-\item [Suitability for Optical Communication] DPIM is often used in optical communication systems because it can be implemented as light pulses.
-\item [Simplicity] The circuitry for DPIM can be simpler than other modulation schemes, as it only needs to control the timing of pulses.
+	\item [Suitability for Optical Communication] DPIM is often used in optical communication systems because it can be implemented as light pulses.
+	\item [Simplicity] The circuitry for DPIM can be simpler than other modulation schemes, as it only needs to control the timing of pulses.
 \end{description}
 
 However, there has been a lack of adoption based on the following disadvantages:
 
 \begin{description}
 
-\item[Synchronization Complexity] One of the main challenges of DPIM is the requirement for precise synchronization between the transmitter and receiver. As with all temporal systems encoding and decoding require a very stable and accurate clock, which can add complexity and cost to the system.
-\item[Limited Data Rate] While DPIM can accommodate variable data rates, the practical data rate might be limited by the precision of the timing measurements.
-\item[Error Propagation] In some implementations of DPIM, errors in detecting one pulse interval can propagate and affect the detection of subsequent intervals.
+	\item[Synchronization Complexity] One of the main challenges of DPIM is the requirement for precise synchronization between the transmitter and receiver. As with all temporal systems encoding and decoding require a very stable and accurate clock, which can add complexity and cost to the system.
+	\item[Limited Data Rate] While DPIM can accommodate variable data rates, the practical data rate might be limited by the precision of the timing measurements.
+	\item[Error Propagation] In some implementations of DPIM, errors in detecting one pulse interval can propagate and affect the detection of subsequent intervals.
 \end{description}
 
-One point to note that affects how we might process temporal intervals in a computational setting is the use of ramp functions \cite{sato1978pulse}. A \textbf{ramp function}, also known as a saw-tooth wave or ramp waveform, is a type of signal where the voltage or current increases linearly with time, then abruptly drops back to its starting value, and repeats this cycle periodically. Figure \ref{fig:pim} gives a typical view of communication system using ramp functions to DPIM encoded data. 
+One point to note that affects how we might process temporal intervals in a computational setting is the use of ramp functions \cite{sato1978pulse}. A \textbf{ramp function}, also known as a saw-tooth wave or ramp waveform, is a type of signal where the voltage or current increases linearly with time, then abruptly drops back to its starting value, and repeats this cycle periodically. Figure \ref{fig:pim} gives a typical view of communication system using ramp functions to DPIM encoded data.
 
 \begin{figure}[ht]
-\centerline{\includegraphics[width=300pt]{figures/PIM.png}}
-\caption{A communication system using ramps to encode and decode data. Taken from \cite{sato1978pulse}}\label{fig:pim}
+	\centerline{\includegraphics[width=300pt]{figures/PIM.png}}
+	\caption{A communication system using ramps to encode and decode data. Taken from \cite{sato1978pulse}}\label{fig:pim}
 \end{figure}
 
 DPIM has served as inspiration for many studies of neural information encoding in Neuroscience \cite{meister1999neural} \cite{rieke1995naturalistic} \cite{borst1999information}, Mackay's work \cite{MacKay1952} focused on the channel capacity of this simple model, and surprisingly they find that for a suitable set of constraints, time encoding outperforms single bit based information encoding.
 
 \section{Oscillatory Systems}\label{oscil}
 
-An oscillatory computer utilises the dynamics of time-based coupled oscillators to perform computation. 
+An oscillatory computer utilises the dynamics of time-based coupled oscillators to perform computation.
 
 Coupled Oscillators are a technique in non-linear dynamics that produce stable and predictable patterns of oscillation from the ensemble behaviours of many oscillators \cite{strogatz2001nonlinear}. The classic example of this is the firefly synchronisation problem \cite{buck1988synchronous} where fireflies in a forest synchronise their flashing patterns.
 
-Unlike traditional computers, oscillatory computers encode and process information using the phase, frequency, or amplitude of oscillations. This approach is inspired by the observation that many biological systems, including the brain, use oscillatory dynamics for information processing and communication. For a review article and example see \cite{csaba2020coupled} and \cite{csaba2018perspectives}. Example systems include \cite{ring} \cite{delacour2021oscillatory} \cite{delacour2023mixed} \cite{corti2021networks} \cite{frady2019robust} \cite{maher2024highly}. 
+Unlike traditional computers, oscillatory computers encode and process information using the phase, frequency, or amplitude of oscillations. This approach is inspired by the observation that many biological systems, including the brain, use oscillatory dynamics for information processing and communication. For a review article and example see \cite{csaba2020coupled} and \cite{csaba2018perspectives}. Example systems include \cite{ring} \cite{delacour2021oscillatory} \cite{delacour2023mixed} \cite{corti2021networks} \cite{frady2019robust} \cite{maher2024highly}.
 
 The advantages of oscillatory computers include:
 
 \begin{itemize}
-\item Parallelism through the emerging dynamics of coupling.
-\item Energy Efficiency as they often rely on the natural dynamics of physical systems.
-\item Robustness to noise and variability, due to the collective dynamics of coupled oscillators.
+	\item Parallelism through the emerging dynamics of coupling.
+	\item Energy Efficiency as they often rely on the natural dynamics of physical systems.
+	\item Robustness to noise and variability, due to the collective dynamics of coupled oscillators.
 \end{itemize}
 
 \begin{figure}
-\centerline{\includegraphics[width=200pt]{figures/oscil.png}}
-\caption{An example of how phase might encode a signal, in this case binary 0 and 1}\label{fig:fig2}
+	\centerline{\includegraphics[width=200pt]{figures/oscil.png}}
+	\caption{An example of how phase might encode a signal, in this case binary 0 and 1}\label{fig:fig2}
 \end{figure}
 
 Some of challenges associated with oscillatory computers include:
 
 \begin{description}
-\item[Precision] The precision of computations in oscillatory computers may be limited by the inherent variability and noise in the oscillatory dynamics.
-\item[Programmability] Programming oscillatory computers can be difficult, as it requires the control of the complex dynamics of the coupling.
-\item[Scalability] Scaling up oscillatory computers to large numbers of oscillators can be difficult, as the dynamics can become increasingly complex and hard to control.
-\item[Interfacing] as with many systems discussed in this document interfacing with traditional digital systems is problematic, with similar problems to analog to digital conversion. 
+	\item[Precision] The precision of computations in oscillatory computers may be limited by the inherent variability and noise in the oscillatory dynamics.
+	\item[Programmability] Programming oscillatory computers can be difficult, as it requires the control of the complex dynamics of the coupling.
+	\item[Scalability] Scaling up oscillatory computers to large numbers of oscillators can be difficult, as the dynamics can become increasingly complex and hard to control.
+	\item[Interfacing] as with many systems discussed in this document interfacing with traditional digital systems is problematic, with similar problems to analog to digital conversion.
 \end{description}
 
 \section{Spiking Neural Networks and Neuromorphic Compute}\label{neuro}
@@ -276,34 +276,34 @@ Spiking Neural Networks (SNNs) \cite{maass2001pulsed} are a type of artificial n
 SNNs are explicitly temporal using spikes to define data, their key aspects are:
 
 \begin{description}
-\item[Information Encoding] There are a variety of coding schemes, not just the ``width'' encoding discussed in this document. These are: 
-\begin{description}
-\item[Rate Coding] Information is encoded in the average firing rate of neurons, similar to traditional ANNs.
-\item[Temporal Coding] Information is encoded in the precise timing of individual spikes. This can include schemes like Time to First Spike (TTFS) or Rank Order Coding (ROC).
-\item[Population Coding] Information is encoded in the collective activity of a group of neurons.
-\end{description}
-See appendix \ref{app:brain} for further discussion.
+	\item[Information Encoding] There are a variety of coding schemes, not just the ``width'' encoding discussed in this document. These are:
+	      \begin{description}
+		      \item[Rate Coding] Information is encoded in the average firing rate of neurons, similar to traditional ANNs.
+		      \item[Temporal Coding] Information is encoded in the precise timing of individual spikes. This can include schemes like Time to First Spike (TTFS) or Rank Order Coding (ROC).
+		      \item[Population Coding] Information is encoded in the collective activity of a group of neurons.
+	      \end{description}
+	      See appendix \ref{app:brain} for further discussion.
 
-\item[Neuron Models] SNNs use more biologically plausible activation functions than ANNs. Some commonly used ones are:
-\begin{description}
-\item[Integrate-and-Fire (IF) Neurons] \cite{burkitt2006review} IF neurons integrate incoming spikes and fire an output spike when a threshold is reached. After firing, the neuron's membrane potential is reset.
-\item[Leaky Integrate-and-Fire (LIF) Neurons] \cite{tal1997computing} LIF neurons are similar to IF neurons but include a leakage term that causes the membrane potential to decay over time.
-\item[Hodgkin-Huxley Neurons] \cite{y2003computation} The Hodgkin-Huxley model is a detailed biophysical model that describes the dynamics of ion channels in the neuron membrane.
-\end{description}
-\item[Synaptic Models] In SNNs, synapses can have dynamic behaviors, unlike the static weights used in traditional ANNs. This gives rise to a computationally richer and more compact pattern processing systems.
+	\item[Neuron Models] SNNs use more biologically plausible activation functions than ANNs. Some commonly used ones are:
+	      \begin{description}
+		      \item[Integrate-and-Fire (IF) Neurons] \cite{burkitt2006review} IF neurons integrate incoming spikes and fire an output spike when a threshold is reached. After firing, the neuron's membrane potential is reset.
+		      \item[Leaky Integrate-and-Fire (LIF) Neurons] \cite{tal1997computing} LIF neurons are similar to IF neurons but include a leakage term that causes the membrane potential to decay over time.
+		      \item[Hodgkin-Huxley Neurons] \cite{y2003computation} The Hodgkin-Huxley model is a detailed biophysical model that describes the dynamics of ion channels in the neuron membrane.
+	      \end{description}
+	\item[Synaptic Models] In SNNs, synapses can have dynamic behaviors, unlike the static weights used in traditional ANNs. This gives rise to a computationally richer and more compact pattern processing systems.
 \end{description}
 
 One of the most relevant applications of this idea is the work done by Hopfield \cite{hopfield1995pattern}. Hopfield's key insight was that the correct representation is the key to solving difficult problems:
 
 \begin{quote}
-The choice of information representation is of vital importance in making a computation easy, as is illustrated by the question 'is 3630225 divisible by 7?'. If the number 3630225 is in base 10, answering this takes a bit of work. If the number 3630225 is in base 7, the answer is immediate from inspection of the last digit. The choice of representation for analogue information is equally important for neural computation. \cite{hopfield1995pattern}
+	The choice of information representation is of vital importance in making a computation easy, as is illustrated by the question 'is 3630225 divisible by 7?'. If the number 3630225 is in base 10, answering this takes a bit of work. If the number 3630225 is in base 7, the answer is immediate from inspection of the last digit. The choice of representation for analogue information is equally important for neural computation. \cite{hopfield1995pattern}
 \end{quote}
 
 The main focus of this work is to mimic the behaviour of the olfactory system. This particular problem is termed the ``analog match'' problems, and whilst solvable via traditional logistic methods is more robust when recast as a coincidence problem. Figure \ref{fig:carlos} shows how the system functions, note that the data is log scaled.
 
 \begin{figure}
-  \centerline{\includegraphics[width=300pt]{figures/carlos.png}}
-  \caption{Computing with Action Potentials, taken from \cite{hopfield1995pattern}}\label{fig:carlos}
+	\centerline{\includegraphics[width=300pt]{figures/carlos.png}}
+	\caption{Computing with Action Potentials, taken from \cite{hopfield1995pattern}}\label{fig:carlos}
 \end{figure}
 
 \section{Critique and Next Steps}
@@ -312,13 +312,13 @@ The document provides an overview of four emerging areas in computing: race logi
 
 \begin{description}
 
-\item[Racelogic] is a practical and promising approach for utilising temporal data in computing. It's highlighted as one of the first methods to effectively a \textit{truly} temporal approach. Also, the work on temporal memories, significantly strengthens the case for this technology, and racelogic has already explored wide-ranging applications. Its scope in terms of arithmetic and compute based operations is currently limited to a few comparison operations, and hence there is a lack of insight into utilising race logic as a general-purpose computer. 
+	\item[Racelogic] is a practical and promising approach for utilising temporal data in computing. It's highlighted as one of the first methods to effectively a \textit{truly} temporal approach. Also, the work on temporal memories, significantly strengthens the case for this technology, and racelogic has already explored wide-ranging applications. Its scope in terms of arithmetic and compute based operations is currently limited to a few comparison operations, and hence there is a lack of insight into utilising race logic as a general-purpose computer.
 
-\item[Unary Computing] Despite extensive past research, unary computing has been largely overlooked in recent years. It holds potential for reevaluation in light of advancements in AI and complex computing systems. The primary challenge lies in its memory footprint, as traditional memory doesn't scale well for unary representations. However, true temporal systems, ones which use time as data directly, are an avenue to alleviate this problem. Future research opportunities also include exploring unary signals with non-linear representations, which increase the efficiency of the subsequent computation.
+	\item[Unary Computing] Despite extensive past research, unary computing has been largely overlooked in recent years. It holds potential for reevaluation in light of advancements in AI and complex computing systems. The primary challenge lies in its memory footprint, as traditional memory doesn't scale well for unary representations. However, true temporal systems, ones which use time as data directly, are an avenue to alleviate this problem. Future research opportunities also include exploring unary signals with non-linear representations, which increase the efficiency of the subsequent computation.
 
-\item[Oscillatory Computing] Oscillator computing shows significant promise, with potential for high-speed operations in the range of 50-100 GHz. This technology could potentially offer a 10x improvement over current computing capabilities, however seems to be applicable to specialist problems rather than general compute.
+	\item[Oscillatory Computing] Oscillator computing shows significant promise, with potential for high-speed operations in the range of 50-100 GHz. This technology could potentially offer a 10x improvement over current computing capabilities, however seems to be applicable to specialist problems rather than general compute.
 
-\item[Neuromorphic Computing] is the most mature technology among those reviewed. However, it is perhaps too literal in mimicking brain functionality, which may limit its potential. Our view is that time-based approaches should be emphasised over biological plausibility the analogy we draw is that of aircraft design, which draws inspiration from birds flight but in no way mimics the wing-flapping approach. 
+	\item[Neuromorphic Computing] is the most mature technology among those reviewed. However, it is perhaps too literal in mimicking brain functionality, which may limit its potential. Our view is that time-based approaches should be emphasised over biological plausibility the analogy we draw is that of aircraft design, which draws inspiration from birds flight but in no way mimics the wing-flapping approach.
 \end{description}
 
 In conclusion, while each area reviewed above faces unique challenges, they all offer promising avenues for future research and development. Therefore the aim of the future work to conducted as a part of this PhD study is to perform some realistic practical assessments on example temporal systems in terms of key performance indicators. The scope of this work will initially focus solely on the more general version of temporal processing applied to neurally inspired architectures, since this is the most important opportunity.
@@ -329,13 +329,13 @@ In conclusion, while each area reviewed above faces unique challenges, they all 
 The following section describes the major encoding methods utilised by the brain. This serves as background to the biological inspiration of the temporal coding strategy \cite{victor2000brain}.
 
 \begin{figure}[ht]
-  \centering
-  \includegraphics[width=200pt]{figures/rate.png}
-  \caption{Rate and Time-to-first-spike Coding}
-  \label{fig:rate}
+	\centering
+	\includegraphics[width=200pt]{figures/rate.png}
+	\caption{Rate and Time-to-first-spike Coding}
+	\label{fig:rate}
 \end{figure}
 
-Rate coding is the ``standard'' scheme for modelling neural signals computational \cite{rosenblatt1958perceptron}. The term is self-explanatory it is a count of the rate by which spikes arrive at a computational unit (see Figure \ref{fig:rate}). Averaging is robust and easy to model as a scalar value on traditional computers, however some questions exist as to whether a more immediate response is required from a (potentially threatening) stimulus, hence investigations into temporal and time to first spike encodings. 
+Rate coding is the ``standard'' scheme for modelling neural signals computational \cite{rosenblatt1958perceptron}. The term is self-explanatory it is a count of the rate by which spikes arrive at a computational unit (see Figure \ref{fig:rate}). Averaging is robust and easy to model as a scalar value on traditional computers, however some questions exist as to whether a more immediate response is required from a (potentially threatening) stimulus, hence investigations into temporal and time to first spike encodings.
 
 \subsection{Spike Timings}
 
@@ -343,15 +343,124 @@ In contrast to rate coding interval or spike coding utilises the exact time betw
 
 $$C=\frac{2}{\Delta T(m+ r)} log_2(m- r)$$
 
-where $\Delta T$ is the time resolution, $m=(T_m-T_r)/\Delta T$ approximately the range of data, and $r=\frac{T_r}{\Delta T}$ a lower bound. 
+where $\Delta T$ is the time resolution, $m=(T_m-T_r)/\Delta T$ approximately the range of data, and $r=\frac{T_r}{\Delta T}$ a lower bound.
 
-\subsection{Time to First Spike Coding}
+\section{Encoding in Stochastic and Probabilistic Computing}
 
-Time to First Spike (TTFS) coding \cite{bonilla2022analyzing} is a form of temporal coding used to represent and process information based on the precise timing of the first spike generated by a neuron in response to a stimulus. This encoding scheme is inspired by the observation that in some biological neural systems, the timing of the first spike can convey significant information about the stimulus. In TTFS coding, information is encoded in the latency or the time it takes for a neuron to generate the first spike after the onset of a stimulus. The stronger the stimulus, the faster the neuron reaches the threshold for generating a spike. This means that the timing of the first spike carries information about the stimulus intensity or other features. TTFS coding relies on the precise timing of spikes, often with millisecond or even sub-millisecond precision. This high temporal resolution allows for rapid and efficient information processing. Since information is conveyed by the timing of the first spike, TTFS coding can be energy-efficient. Once the first spike is generated, the neuron can remain silent until the next relevant stimulus, reducing the number of spikes and thus saving energy. TTFS coding enables fast responses to stimuli, as the system does not need to wait for multiple spikes or a change in the firing rate. This makes it suitable for applications where speed is crucial, such as real-time sensory processing or rapid decision-making tasks.
+In stochastic computing, encoding is performed using random bitstreams where the proportion of 1s represents a numerical value. This is typically done using either \textbf{unipolar} or \textbf{bipolar} encoding schemes.
+Unipolar Encoding represents values in the range $[0, 1]$. A number $x$ is encoded as a bitstream where the probability of a 1 is $x$. For example, a value of $0.75$ might be encoded as a bitstream like \texttt{1101111011111011}, which contains approximately $75\%$ 1s. A Bipolar Encoding Represents values in the range $[-1, +1]$. A value $x$ is encoded with the probability of a 1 as $(x + 1)/2$. For example, a value of $-0.5$ would be encoded with a bitstream containing approximately $25\%$ 1s.
 
-\subsection{Order Coding}
+\section{Advantages}
+\begin{itemize}
+  \item \textbf{Simplified arithmetic:} Multiplication becomes a simple AND gate (unipolar) or XNOR gate (bipolar).
+  \item \textbf{Fault tolerance:} Randomness makes systems robust to noise and bit flips.
+  \item \textbf{Low hardware cost:} Uses simple logic gates instead of full arithmetic units.
+\end{itemize}
 
-Rank Order Coding (ROC) \cite{thorpe1998rank} is a coding scheme used to represent and process information based on the relative order or rank of spikes generated by a population of neurons in response to a stimulus. Unlike TTFS coding, which focuses on the precise timing of the first spike from individual neurons, ROC considers the sequence or order of spikes across a population of neurons. In ROC, information is encoded in the relative order or rank of spikes generated by different neurons. When a stimulus is presented, the neurons that are most sensitive or selective to the stimulus features will fire first, followed by less sensitive neurons. The order in which neurons fire thus carries information about the stimulus. ROC is invariant to global latency shifts, meaning that the exact timing of the spikes is less critical than their relative order. This property makes ROC robust to variations in the overall response latency, which can be caused by factors such as changes in stimulus intensity or background activity. ROC enables fast processing of information, as the system does not need to wait for multiple spikes or a change in the firing rate. The rank order of the first spikes from a population of neurons can provide a quick and efficient representation of the stimulus.
+\section{Example: Unipolar Multiplication}
+To multiply $0.5 \times 0.75$:
+\begin{itemize}
+  \item Encode $0.5$ as a bitstream with $50\%$ 1s.
+  \item Encode $0.75$ as a bitstream with $75\%$ 1s.
+  \item AND the streams to get a result with approximately $37.5\%$ 1s, representing $0.375$.
+\end{itemize}
+
+\section{Challenges}
+\begin{itemize}
+  \item \textbf{Accuracy:} Requires long bitstreams for precision.
+  \item \textbf{Latency:} Longer streams mean slower computation.
+  \item \textbf{Correlation:} Input streams must be uncorrelated to avoid bias.
+\end{itemize}
+
+A \textbf{p-bit} (probabilistic bit) is a classical binary unit that fluctuates randomly between $+1$ and $-1$ with a tunable probability. Unlike deterministic bits, p-bits are inherently stochastic and can be biased toward one state or the other using an input signal \cite{camsari2017stochastic}.
+
+\section{Mathematical Model}
+The state $m_i$ of a p-bit is given by:
+
+\begin{equation}
+	m_i(t) = +/- [\tanh(I_i(t)) + r(t)]
+\end{equation}
+where:
+\begin{itemize}
+  \item $I_i(t)$ is the input bias at time $t$
+  \item $r(t)$ is a random number uniformly distributed in $[-1, 1]$
+  \item $+/-$ is the sign function
+\end{itemize}
+
+\section{Key Properties}
+\begin{itemize}
+  \item \textbf{Tunable randomness:} The probability of outputting $+1$ or $-1$ depends on the input bias.
+  \item \textbf{Autonomous flipping:} P-bits update asynchronously and independently \cite{camsari2019petaflips}.
+  \item \textbf{Energy-efficient:} Can be implemented using low-power devices like stochastic magnetic tunnel junctions (sMTJs) \cite{camsari2023fullstack}.
+\end{itemize}
+
+\section{Comparison to Stochastic Computing}
+While both p-bits and stochastic computing rely on randomness, p-bits  Operate on single fluctuating bits rather than long bitstreams, and allow dynamic tuning of probability via input bias. They are better suited for asynchronous, parallel architectures.
+
+\section{MeTTa: A Reflective Meta-Language for AGI}
+
+MeTTa (Meta-Type Talk) \cite{goertzel2021metagraph} \cite{singularitynet2024mett} is the foundational programming language of OpenCog Hyperon \cite{opencogHyperon}, designed to support Artificial General Intelligence (AGI) through symbolic reasoning, introspection, and self-modifying code. It serves as a meta-language capable of defining and manipulating other languages and type systems.
+
+
+\subsection{Core Features}
+
+Reflective Metagraph Rewriting, Programs are represented as metagraphs---graphs of graphs---enabling recursive transformations and dynamic reasoning. MeTTa uses powerful pattern-matching and substitution primitives to infer and rewrite expressions. The language is syntactically sparse, allowing users to define custom logics and type systems. Grounding Support: Symbolic atoms can be linked to sensory or motor data, enabling embodied cognition.
+ MeTTa programs can inspect and alter their own structure, supporting recursive self-improvement.
+
+MeTTa operates as the lowest-level cognitive substrate in OpenCog Hyperon. It interfaces with the Distributed Atomspace (DAS), orchestrating reasoning, learning, and control. It replaces Atomese from OpenCog Classic with a more flexible and semantically rich alternative.
+
+\section*{Applications}
+\begin{itemize}
+  \item Symbolic reasoning and logic programming
+  \item Cognitive architecture modeling
+  \item AGI-oriented introspection and learning
+\end{itemize}
+
+MeTTa, the meta-language of OpenCog Hyperon, supports probabilistic reasoning by enabling symbolic manipulation of uncertain knowledge through pattern rewriting and weighted truth values. Unlike traditional probabilistic programming languages that rely on explicit probability distributions, MeTTa operates over a hypergraph-based memory structure (the Distributed Atomspace), where each atom may carry a \textit{truth value}---a pair representing strength and confidence.
+
+Probabilistic inference in MeTTa emerges from the interaction of three key mechanisms: (1) pattern matching over uncertain structures, (2) rule-based rewriting conditioned on probabilistic thresholds, and (3) recursive self-modification of inference strategies. These mechanisms allow MeTTa to encode Bayesian-like updates, fuzzy logic, and stochastic search within a unified symbolic substrate.
+
+Rather than treating probability as a separate computational layer, MeTTa integrates it into the fabric of cognitive processes. For example, attention allocation, memory retrieval, and goal selection can all be guided by probabilistic heuristics encoded as MeTTa rules. This enables AGI systems to reason under uncertainty, adaptively revise beliefs, and simulate human-like cognition.
+
+\section{Probabilistic Reasoning Example in MeTTa}
+\section{Problem}
+Decide whether to carry an umbrella based on the probability of rain. If the probability exceeds 0.6, the system recommends carrying an umbrella.
+
+\section{MeTTa-Like Representation}
+
+\begin{verbatim}
+;; Define a probabilistic belief
+(Probability (RainToday) 0.75)
+
+;; Rule: If rain probability exceeds threshold, recommend umbrella
+(If
+  (GreaterThan (Probability (RainToday)) 0.6)
+  (Then (Action CarryUmbrella))
+)
+\end{verbatim}
+
+\section{Rewrite Logic}
+
+\begin{verbatim}
+;; Pattern to match
+(Probability ?event ?p)
+(GreaterThan ?p 0.6)
+
+;; Rewrite result
+(Action CarryUmbrella)
+\end{verbatim}
+
+\section{Truth Value Representation}
+
+In OpenCog Hyperon, atoms may carry truth values as pairs of strength and confidence:
+
+\begin{verbatim}
+(RainToday)
+:TruthValue (Strength 0.75) (Confidence 0.9)
+\end{verbatim}
+
+\section*{Interpretation}
+This structure allows MeTTa to reason symbolically over uncertain inputs and take action based on probabilistic thresholds. The system can generalize this logic to other decisions involving uncertainty.
 
 \bibliographystyle{abbrv}
 \bibliography{temporal}
