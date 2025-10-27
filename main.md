@@ -1,20 +1,3 @@
----
-abstract: |
-  This report consists of a review of the literature and a plan for
-  integration related to **temporal computing**, a novel method of
-  computation that uses time intervals as the primary method of storing
-  and manipulating data. The literature review covers a broad range of
-  methods which implement both computation and communication. The plan
-  of further work focuses on assessing the a novel temporally inspired
-  digital implementation of dot product, and a broader more theoretical
-  work on the fundamental building blocks of temporal computing methods.
-author:
-- Jonny Edwards
-bibliography: temporal.bib
-date: 2025-10-14
-title: Temporal Computing
----
-
 # Introduction
 
 The ability to perform accurate repetitive computation has been central
@@ -100,23 +83,14 @@ With this in mind, the agenda of this report is:
 
 - To cover all research specifically referenced as "temporal" by the
   racelogic community (section [2](#race){reference-type="ref"
-  reference="race"}).
+  reference="race"}). For completeness, include Unary, oscillatory and
+  neuromorphic computing in the discussion (Sections
+  [6](#oscil){reference-type="ref" reference="oscil"} and
+  [7](#neuro){reference-type="ref" reference="neuro"})
 
-- To also include older work on Unary computing including work referred
-  to as temporal/unary but which also could be defined as stochastic.
-  (section [3](#unary){reference-type="ref" reference="unary"}).
-
-- To also include communication methods that use similar interval
-  encodings and have processing approaches that may be repurposed to
-  compute (Section [4](#coms){reference-type="ref" reference="coms"}).
-
-- For completeness, include both oscillatory and neuromorphic computing
-  in the discussion (Sections [5](#oscil){reference-type="ref"
-  reference="oscil"} and [6](#neuro){reference-type="ref"
-  reference="neuro"})
-
-This nicely sets the agenda for future work which we define as a mission
-with a plan and milestones (See separate planning document).
+- To pave the way for the integration of this work into a broader
+  probabilistic framework that is amenable for integration into a
+  declarative AGI pipeline such as that provided by the Metta language.
 
 # Racelogic {#race}
 
@@ -186,8 +160,7 @@ delimiter. Table [1](#mem1){reference-type="ref" reference="mem1"} gives
 a breakdown of how unary codes are constructed for the first few decimal
 numbers. We introduce a further code Discrete Pulse Interval Modulation
 (DPIM), which is a form of unary code, and is used in the communication
-community and is discussed in Section [4](#coms){reference-type="ref"
-reference="coms"}.
+community.
 
 :::: center
 ::: {#mem1}
@@ -224,7 +197,8 @@ Stochastic
     sometimes with randomness incorporated. Many machines have been
     built with this premise, including **RASCEL** [@esch1969rascel]
     **POSTCOMP** [@poppelbaum1967stochastic]. This continues to be an
-    active field of research [@alaghi2013survey].
+    active field of research [@alaghi2013survey]. We review this work in
+    more detail below.
 
 Burst
 
@@ -253,6 +227,88 @@ represent data.
 More modern work in this area has been performed by Wu [@wu2020ugemm]
 [@pan2022t] [@wu2022usystolic]. This work is again mainly unary and
 again not explicitly temporal.
+
+Before moving on to more elaborate unary notations, let us briefly
+discuss stochastic and probabilistic methods. In stochastic computing,a
+form of unary encoding is performed using random bitstreams where the
+proportion of 1s represents a numerical value. This is typically done
+using either **unipolar** or **bipolar** encoding schemes. Unipolar
+Encoding represents values in the range $[0, 1]$. A number $x$ is
+encoded as a bitstream where the probability of a 1 is $x$. For example,
+a value of $0.75$ might be encoded as a bitstream like
+`1101111011111011`, which contains approximately $75\%$ 1s. A Bipolar
+Encoding Represents values in the range $[-1, +1]$. A value $x$ is
+encoded with the probability of a 1 as $(x + 1)/2$. For example, a value
+of $-0.5$ would be encoded with a bitstream containing approximately
+$25\%$ 1s.
+
+### Advantages
+
+- **Simplified arithmetic:** Multiplication becomes a simple AND gate
+  (unipolar) or XNOR gate (bipolar).
+
+- **Fault tolerance:** Randomness makes systems robust to noise and bit
+  flips.
+
+- **Low hardware cost:** Uses simple logic gates instead of full
+  arithmetic units.
+
+# Example: Unipolar Multiplication
+
+To multiply $0.5 \times 0.75$:
+
+- Encode $0.5$ as a bitstream with $50\%$ 1s.
+
+- Encode $0.75$ as a bitstream with $75\%$ 1s.
+
+- AND the streams to get a result with approximately $37.5\%$ 1s,
+  representing $0.375$.
+
+# Challenges
+
+- **Accuracy:** Requires long bitstreams for precision.
+
+- **Latency:** Longer streams mean slower computation.
+
+- **Correlation:** Input streams must be uncorrelated to avoid bias.
+
+A **p-bit** (probabilistic bit) is a classical binary unit that
+fluctuates randomly between $+1$ and $-1$ with a tunable probability.
+Unlike deterministic bits, p-bits are inherently stochastic and can be
+biased toward one state or the other using an input signal
+[@camsari2017stochastic].
+
+### Mathematical Model
+
+The state $m_i$ of a p-bit is given by:
+
+$$\begin{equation}
+    m_i(t) = +/- [\tanh(I_i(t)) + r(t)]
+\end{equation}$$ where:
+
+- $I_i(t)$ is the input bias at time $t$
+
+- $r(t)$ is a random number uniformly distributed in $[-1, 1]$
+
+- $+/-$ is the sign function
+
+### Key Properties
+
+- **Tunable randomness:** The probability of outputting $+1$ or $-1$
+  depends on the input bias.
+
+- **Autonomous flipping:** P-bits update asynchronously and
+  independently [@camsari2019petaflips].
+
+- **Energy-efficient:** Can be implemented using low-power devices like
+  stochastic magnetic tunnel junctions (sMTJs) [@camsari2023fullstack].
+
+### Comparison to Stochastic Computing
+
+While both p-bits and stochastic computing rely on randomness, p-bits
+Operate on single fluctuating bits rather than long bitstreams, and
+allow dynamic tuning of probability via input bias. They are better
+suited for asynchronous, parallel architectures.
 
 ## Multiplexed Unary
 
@@ -333,7 +389,7 @@ $acc,height \gets 0$ $i \gets |mem|-1$ **return** acc
 
 <figure id="fig:madd" data-latex-placement="ht">
 <img src="figures/rId37.png" style="width:200pt" />
-<figcaption>MADD: A description based on a goemetric view of the MADD
+<figcaption>MADD: A description based on a geometric view of the MADD
 algorithm. Here we perform the operation <span
 class="math inline">(4 × 10) + (4 × 4)</span> right to left by
 accumulating the "height" at the index point</figcaption>
@@ -342,96 +398,7 @@ accumulating the "height" at the index point</figcaption>
 The MADD algorithm originated from the use of discrete memory indexes as
 a simulation of time delays. As such the MADD algorithm is inspired by
 the temporal approach, but, its representation does not use time delays
-directly as the storage medium. Appendix
-[\[app:dmadd\]](#app:dmadd){reference-type="ref" reference="app:dmadd"}
-discusses an extension to this method, called Delta MADD.
-
-# Temporal/Unary for Communication {#coms}
-
-Interval codes have been exploited in the communication community in the
-form of DPIM [@Das1967PulseintervalM], where the pulses delimit both the
-beginning and end of the encoded value. This method was heavily
-researched from the late sixties onwards [@marougi1983signal]
-[@kaluarachchi1997digital] [@sato1978pulse] and revisited by the optical
-community during the nineties [@ghassemlooy1998digital]
-[@ghassemlooy2000digital]. The scheme is very simple, and efficient in
-terms of the sparsity of the representation, with two spikes being able
-to represent any magnitude.
-
-There are several further compelling advantages:
-
-Bandwidth Efficiency
-
-:   DPIM is more bandwidth-efficient than some other modulation schemes.
-    This is because it doesn't require changes in amplitude or pulse
-    width, which can demand more bandwidth.
-
-Power Efficiency
-
-:   Since DPIM doesn't rely on varying amplitude, it can be more
-    power-efficient. Ghassemlooy states:
-
-    > For the same packet error performance, 4-bit DPIM has about a 5dB
-    > power advantage over OOK, but requires approximately 1dB more
-    > power than 4-bit PPM [@ghassemlooy2000digital].
-
-    OOK is traditional bit encoding and PPM is Pulse Position Modulation
-    (the same as DPIM but with a constant bit-width, hence pulses are
-    not self-delimiting).
-
-Suitability for Optical Communication
-
-:   DPIM is often used in optical communication systems because it can
-    be implemented as light pulses.
-
-Simplicity
-
-:   The circuitry for DPIM can be simpler than other modulation schemes,
-    as it only needs to control the timing of pulses.
-
-However, there has been a lack of adoption based on the following
-disadvantages:
-
-Synchronization Complexity
-
-:   One of the main challenges of DPIM is the requirement for precise
-    synchronization between the transmitter and receiver. As with all
-    temporal systems encoding and decoding require a very stable and
-    accurate clock, which can add complexity and cost to the system.
-
-Limited Data Rate
-
-:   While DPIM can accommodate variable data rates, the practical data
-    rate might be limited by the precision of the timing measurements.
-
-Error Propagation
-
-:   In some implementations of DPIM, errors in detecting one pulse
-    interval can propagate and affect the detection of subsequent
-    intervals.
-
-One point to note that affects how we might process temporal intervals
-in a computational setting is the use of ramp functions
-[@sato1978pulse]. A **ramp function**, also known as a saw-tooth wave or
-ramp waveform, is a type of signal where the voltage or current
-increases linearly with time, then abruptly drops back to its starting
-value, and repeats this cycle periodically. Figure
-[8](#fig:pim){reference-type="ref" reference="fig:pim"} gives a typical
-view of communication system using ramp functions to DPIM encoded data.
-
-<figure id="fig:pim" data-latex-placement="ht">
-<img src="figures/PIM.png" style="width:300pt" />
-<figcaption>A communication system using ramps to encode and decode
-data. Taken from <span class="citation"
-data-cites="sato1978pulse"></span></figcaption>
-</figure>
-
-DPIM has served as inspiration for many studies of neural information
-encoding in Neuroscience [@meister1999neural] [@rieke1995naturalistic]
-[@borst1999information], Mackay's work [@MacKay1952] focused on the
-channel capacity of this simple model, and surprisingly they find that
-for a suitable set of constraints, time encoding outperforms single bit
-based information encoding.
+directly as the storage medium.
 
 # Oscillatory Systems {#oscil}
 
@@ -531,9 +498,6 @@ Information Encoding
     :   Information is encoded in the collective activity of a group of
         neurons.
 
-    See appendix [8](#app:brain){reference-type="ref"
-    reference="app:brain"} for further discussion.
-
 Neuron Models
 
 :   SNNs use more biologically plausible activation functions than ANNs.
@@ -579,187 +543,11 @@ The main focus of this work is to mimic the behaviour of the olfactory
 system. This particular problem is termed the "analog match" problems,
 and whilst solvable via traditional logistic methods is more robust when
 recast as a coincidence problem. Figure
-[10](#fig:carlos){reference-type="ref" reference="fig:carlos"} shows how
+[9](#fig:carlos){reference-type="ref" reference="fig:carlos"} shows how
 the system functions, note that the data is log scaled.
 
 ![Computing with Action Potentials, taken from
 [@hopfield1995pattern]](figures/carlos.png){#fig:carlos width="300pt"}
-
-# Critique and Next Steps
-
-The document provides an overview of four emerging areas in computing:
-race logic, unary, oscillator, and neuromorphic. Each area presents
-unique challenges and opportunities for advancement in computational
-technology. To summarise the key points:
-
-Racelogic
-
-:   is a practical and promising approach for utilising temporal data in
-    computing. It's highlighted as one of the first methods to
-    effectively a *truly* temporal approach. Also, the work on temporal
-    memories, significantly strengthens the case for this technology,
-    and racelogic has already explored wide-ranging applications. Its
-    scope in terms of arithmetic and compute based operations is
-    currently limited to a few comparison operations, and hence there is
-    a lack of insight into utilising race logic as a general-purpose
-    computer.
-
-Unary Computing
-
-:   Despite extensive past research, unary computing has been largely
-    overlooked in recent years. It holds potential for reevaluation in
-    light of advancements in AI and complex computing systems. The
-    primary challenge lies in its memory footprint, as traditional
-    memory doesn't scale well for unary representations. However, true
-    temporal systems, ones which use time as data directly, are an
-    avenue to alleviate this problem. Future research opportunities also
-    include exploring unary signals with non-linear representations,
-    which increase the efficiency of the subsequent computation.
-
-Oscillatory Computing
-
-:   Oscillator computing shows significant promise, with potential for
-    high-speed operations in the range of 50-100 GHz. This technology
-    could potentially offer a 10x improvement over current computing
-    capabilities, however seems to be applicable to specialist problems
-    rather than general compute.
-
-Neuromorphic Computing
-
-:   is the most mature technology among those reviewed. However, it is
-    perhaps too literal in mimicking brain functionality, which may
-    limit its potential. Our view is that time-based approaches should
-    be emphasised over biological plausibility the analogy we draw is
-    that of aircraft design, which draws inspiration from birds flight
-    but in no way mimics the wing-flapping approach.
-
-In conclusion, while each area reviewed above faces unique challenges,
-they all offer promising avenues for future research and development.
-Therefore the aim of the future work to conducted as a part of this PhD
-study is to perform some realistic practical assessments on example
-temporal systems in terms of key performance indicators. The scope of
-this work will initially focus solely on the more general version of
-temporal processing applied to neurally inspired architectures, since
-this is the most important opportunity.
-
-# Time Coding in the Human Brain {#app:brain}
-
-The following section describes the major encoding methods utilised by
-the brain. This serves as background to the biological inspiration of
-the temporal coding strategy [@victor2000brain].
-
-<figure id="fig:rate" data-latex-placement="ht">
-<img src="figures/rate.png" style="width:200pt" />
-<figcaption>Rate and Time-to-first-spike Coding</figcaption>
-</figure>
-
-Rate coding is the "standard" scheme for modelling neural signals
-computational [@rosenblatt1958perceptron]. The term is self-explanatory
-it is a count of the rate by which spikes arrive at a computational unit
-(see Figure [11](#fig:rate){reference-type="ref" reference="fig:rate"}).
-Averaging is robust and easy to model as a scalar value on traditional
-computers, however some questions exist as to whether a more immediate
-response is required from a (potentially threatening) stimulus, hence
-investigations into temporal and time to first spike encodings.
-
-## Spike Timings
-
-In contrast to rate coding interval or spike coding utilises the exact
-time between two spikes as the magnitude of the signal. This model was
-first mentioned in the work of MacKay and McCullough [@MacKay1952] who
-focused on the channel rate of this simple model. Surprisingly, with
-neuron specific measurements, a maximum selective information capacity
-of about 2.9bit/msec is produced as opposed to 1bit/msec from a simple
-single-bit based encoding over a channel, where Information capacity
-($C$ in bits/time) is given by:
-
-$$C=\frac{2}{\Delta T(m+ r)} log_2(m- r)$$
-
-where $\Delta T$ is the time resolution, $m=(T_m-T_r)/\Delta T$
-approximately the range of data, and $r=\frac{T_r}{\Delta T}$ a lower
-bound.
-
-# Encoding in Stochastic and Probabilistic Computing
-
-In stochastic computing, encoding is performed using random bitstreams
-where the proportion of 1s represents a numerical value. This is
-typically done using either **unipolar** or **bipolar** encoding
-schemes. Unipolar Encoding represents values in the range $[0, 1]$. A
-number $x$ is encoded as a bitstream where the probability of a 1 is
-$x$. For example, a value of $0.75$ might be encoded as a bitstream like
-`1101111011111011`, which contains approximately $75\%$ 1s. A Bipolar
-Encoding Represents values in the range $[-1, +1]$. A value $x$ is
-encoded with the probability of a 1 as $(x + 1)/2$. For example, a value
-of $-0.5$ would be encoded with a bitstream containing approximately
-$25\%$ 1s.
-
-# Advantages
-
-- **Simplified arithmetic:** Multiplication becomes a simple AND gate
-  (unipolar) or XNOR gate (bipolar).
-
-- **Fault tolerance:** Randomness makes systems robust to noise and bit
-  flips.
-
-- **Low hardware cost:** Uses simple logic gates instead of full
-  arithmetic units.
-
-# Example: Unipolar Multiplication
-
-To multiply $0.5 \times 0.75$:
-
-- Encode $0.5$ as a bitstream with $50\%$ 1s.
-
-- Encode $0.75$ as a bitstream with $75\%$ 1s.
-
-- AND the streams to get a result with approximately $37.5\%$ 1s,
-  representing $0.375$.
-
-# Challenges
-
-- **Accuracy:** Requires long bitstreams for precision.
-
-- **Latency:** Longer streams mean slower computation.
-
-- **Correlation:** Input streams must be uncorrelated to avoid bias.
-
-A **p-bit** (probabilistic bit) is a classical binary unit that
-fluctuates randomly between $+1$ and $-1$ with a tunable probability.
-Unlike deterministic bits, p-bits are inherently stochastic and can be
-biased toward one state or the other using an input signal
-[@camsari2017stochastic].
-
-# Mathematical Model
-
-The state $m_i$ of a p-bit is given by:
-
-$$\begin{equation}
-    m_i(t) = +/- [\tanh(I_i(t)) + r(t)]
-\end{equation}$$ where:
-
-- $I_i(t)$ is the input bias at time $t$
-
-- $r(t)$ is a random number uniformly distributed in $[-1, 1]$
-
-- $+/-$ is the sign function
-
-# Key Properties
-
-- **Tunable randomness:** The probability of outputting $+1$ or $-1$
-  depends on the input bias.
-
-- **Autonomous flipping:** P-bits update asynchronously and
-  independently [@camsari2019petaflips].
-
-- **Energy-efficient:** Can be implemented using low-power devices like
-  stochastic magnetic tunnel junctions (sMTJs) [@camsari2023fullstack].
-
-# Comparison to Stochastic Computing
-
-While both p-bits and stochastic computing rely on randomness, p-bits
-Operate on single fluctuating bits rather than long bitstreams, and
-allow dynamic tuning of probability via input bias. They are better
-suited for asynchronous, parallel architectures.
 
 # MeTTa: A Reflective Meta-Language for AGI
 
@@ -851,10 +639,72 @@ and confidence:
     (RainToday)
     :TruthValue (Strength 0.75) (Confidence 0.9)
 
-# Interpretation {#interpretation .unnumbered}
+# Interpretation
 
 This structure allows MeTTa to reason symbolically over uncertain inputs
 and take action based on probabilistic thresholds. The system can
 generalize this logic to other decisions involving uncertainty.
+
+# Critique
+
+The document provides an overview of four emerging areas in computing:
+race logic, unary, oscillator, and neuromorphic. Each area presents
+unique challenges and opportunities for advancement in computational
+technology. To summarise the key points:
+
+Racelogic
+
+:   is a practical and promising approach for utilising temporal data in
+    computing. It's highlighted as one of the first methods to
+    effectively a *truly* temporal approach. Also, the work on temporal
+    memories, significantly strengthens the case for this technology,
+    and racelogic has already explored wide-ranging applications. Its
+    scope in terms of arithmetic and compute based operations is
+    currently limited to a few comparison operations, and hence there is
+    a lack of insight into utilising race logic as a general-purpose
+    computer.
+
+Oscillatory Computing
+
+:   Oscillator computing shows significant promise, with potential for
+    high-speed operations in the range of 50-100 GHz. This technology
+    could potentially offer a 10x improvement over current computing
+    capabilities, however seems to be applicable to specialist problems
+    rather than general compute.
+
+Neuromorphic Computing
+
+:   is the most mature technology among those reviewed. However, it is
+    perhaps too literal in mimicking brain functionality, which may
+    limit its potential. Our view is that time-based approaches should
+    be emphasised over biological plausibility the analogy we draw is
+    that of aircraft design, which draws inspiration from birds flight
+    but in no way mimics the wing-flapping approach.
+
+Unary Computing
+
+:   Despite extensive past research, unary computing has been largely
+    overlooked in recent years. It holds potential for reevaluation in
+    light of advancements in AI and complex computing systems. The
+    primary challenge lies in its memory footprint, as traditional
+    memory doesn't scale well for unary representations. However, true
+    temporal systems, ones which use time as data directly, are an
+    avenue to alleviate this problem. Future research opportunities also
+    include exploring unary signals with non-linear representations,
+    which increase the efficiency of the subsequent computation. It is
+    this methodology together with the discussion on pt-systems that
+    provides the most synergy with the Metta language, and therefore the
+    primary recommendation is to exploit this more fully.
+
+In conclusion, while each area reviewed above faces unique challenges,
+the pt-systems work is the most salient for further investigation, and
+where the scope should be more narrowly focused. Our hope is that a
+fully temporal stochastic system will allow us position Metta as the top
+level language for probabilistic stochastic computing.
+
+To finalise next steps, providing this report is accepted,
+investigations will start into how to implement a pt-system as low level
+hardware, using existing ideas discussed in this report but alleviating
+the memory constraints by building a truly temporal system.
 
 [^1]: 1=1,2=01,3=001
