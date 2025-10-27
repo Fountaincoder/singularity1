@@ -1,3 +1,20 @@
+---
+abstract: |
+  This report consists of a review of the literature and a plan for
+  integration related to **temporal computing**, a novel method of
+  computation that uses time intervals as the primary method of storing
+  and manipulating data. The literature review covers a broad range of
+  methods, with the plan of further work focusing on assessing a novel
+  temporally inspired digital implementation of a probabilistic temporal
+  architecture, which can be readily used at the layer below the MeTTa
+  language.
+author:
+- Jonny Edwards
+bibliography: temporal.bib
+date: 2025-10-27
+title: Temporal Computing
+---
+
 # Introduction
 
 The ability to perform accurate repetitive computation has been central
@@ -90,7 +107,7 @@ With this in mind, the agenda of this report is:
 
 - To pave the way for the integration of this work into a broader
   probabilistic framework that is amenable for integration into a
-  declarative AGI pipeline such as that provided by the Metta language.
+  declarative AGI pipeline such as that provided by the MeTTa language.
 
 # Racelogic {#race}
 
@@ -693,18 +710,17 @@ Unary Computing
     include exploring unary signals with non-linear representations,
     which increase the efficiency of the subsequent computation. It is
     this methodology together with the discussion on pt-systems that
-    provides the most synergy with the Metta language, and therefore the
+    provides the most synergy with the MeTTa language, and therefore the
     primary recommendation is to exploit this more fully.
 
 In conclusion, while each area reviewed above faces unique challenges,
 the pt-systems work is the most salient for further investigation, and
 where the scope should be more narrowly focused. Our hope is that a
-fully temporal stochastic system will allow us position Metta as the top
-level language for probabilistic stochastic computing.
-
-To finalise next steps, providing this report is accepted,
-investigations will start into how to implement a pt-system as low level
-hardware, using existing ideas discussed in this report but alleviating
-the memory constraints by building a truly temporal system.
+fully temporal stochastic system will allow us position Mea as the top
+level language for probabilistic stochastic computing. To finalise next
+steps, providing this report is accepted, investigations will start into
+how to implement a pt-system as low level hardware, using existing ideas
+discussed in this report but alleviating the memory constraints by
+building a truly temporal system.
 
 [^1]: 1=1,2=01,3=001
