@@ -1,6 +1,6 @@
 # TODO - SingularityNET report 
 
-1. get an overall structure
-2. figure out which further referecnes I need   
-3. Edit Latex to format.
+1. [x] get an overall structure
+2. [x] figure out which further references I need   
+3. [x] Edit Latex to format.
  
