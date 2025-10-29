@@ -189,7 +189,7 @@ where:
 \subsubsection{Comparison to Stochastic Computing}
 While both p-bits and stochastic computing rely on randomness, p-bits  Operate on single fluctuating bits rather than long bitstreams, and allow dynamic tuning of probability via input bias. They are better suited for asynchronous, parallel architectures.
 
-
+It is easy to envision p-bits in a temporal unary setting, utilising a time axis for the storage of the probabilistic value. We will refer to these as \textbf{pt-systems}. This is thus-far uncharted territory, with no existing system using this as a methodology, and this is the key area we aim to explore in the design of a new temporal system.
 
 \subsection{Multiplexed Unary}
 
@@ -331,7 +331,7 @@ Some of challenges associated with oscillatory computers include:
 
 Spiking Neural Networks (SNNs) \cite{maass2001pulsed} are a type of artificial neural network that more closely mimic the behavior of biological neural networks. SNNs are a key component of neuromorphic computing, which aims to develop hardware and software systems that mimic the structure and function of biological neural networks. This is extensive literature on neuromorphic hardware platforms, such as SpiNNaker \cite{furber2016large,furber2014spinnaker}, TrueNorth \cite{sawada2016truenorth}, Loihi \cite{davies2018loihi}, and BrainScale \cite{schmitt2017neuromorphic}. These platforms are optimized for low-power, real-time operation often outperforming their DL cousins in terms of energy usage \cite{reuther20}, but at the cost of conjoined hardware and software offerings.
 
-SNNs are explicitly temporal using spikes to define data, their key aspects are:
+Son's are explicitly temporal using spikes to define data, their key aspects are:
 
 \begin{description}
 	\item[Information Encoding] There are a variety of coding schemes, not just the ``width'' encoding discussed in this document. These are:
@@ -451,7 +451,7 @@ This structure allows MeTTa to reason symbolically over uncertain inputs and tak
 
 \section{Critique}
 
-The document provides an overview of four emerging areas in computing: race logic, unary, oscillator, and neuromorphic. Each area presents unique challenges and opportunities for advancement in computational technology. To summarise the key points:
+The document provides an overview of four emerging areas in temporal computing: race logic, unary, oscillator, and neuromorphic. Each area presents unique challenges and opportunities for advancement in computational technology. To summarise the key points:
 
 \begin{description}
 
@@ -466,8 +466,8 @@ The document provides an overview of four emerging areas in computing: race logi
 	\item[Unary Computing] Despite extensive past research, unary computing has been largely overlooked in recent years. It holds potential for reevaluation in light of advancements in AI and complex computing systems. The primary challenge lies in its memory footprint, as traditional memory doesn't scale well for unary representations. However, true temporal systems, ones which use time as data directly, are an avenue to alleviate this problem. Future research opportunities also include exploring unary signals with non-linear representations, which increase the efficiency of the subsequent computation. It is this methodology together with the discussion on pt-systems that provides the most synergy with the MeTTa language, and therefore the primary recommendation is to exploit this more fully.
 \end{description}
 
-In conclusion, while each area reviewed above faces unique challenges, the pt-systems work is the most salient for further investigation, and where the scope should be more narrowly focused. Our hope is that a fully temporal stochastic system will allow us position Mea as the  top level language for probabilistic stochastic computing. 
-To finalise next steps, providing this report is accepted, investigations will start into how to implement a pt-system as low level hardware, using existing ideas discussed in this report but alleviating the memory constraints by building a truly temporal system.  
+We also briefly review Opencog and MeTTa with the overall conclusion being that a good area for synergy is the use of pt-systems as an underlying probabilistic framework for the MeTTa language. Thus, the pt-systems work is the most salient for further investigation, and where the scope should be more narrowly focused. Our hope is that a fully temporal stochastic system will allow us to position MeTTa as the  top level language for probabilistic stochastic computing. 
+To finalise next steps, providing this report is accepted, investigations will start into how to implement a pt-system as low level hardware, using existing ideas discussed in this report, but alleviating the memory constraints by building a truly temporal system.  
 
 
 \bibliographystyle{abbrv}
